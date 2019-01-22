@@ -378,7 +378,7 @@ public class ServletRequestEvent extends EventObject {
 
 ```java
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)         throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)     throws ServletException, IOException {
             final AsyncContext asyncContext = request.startAsync();
             asyncContext.setTimeout(5000);
             
@@ -402,11 +402,11 @@ public class ServletRequestEvent extends EventObject {
 
 ```java
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)         throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)     throws ServletException, IOException {
             final AsyncContext asyncContext = request.startAsync();
             asyncContext.setTimeout(5000);
             
-            asyncContext.addListener(new MyAsyncListener());//MyAsyncListener是一个实现了															     AsyncListener接口的类
+            asyncContext.addListener(new MyAsyncListener());//MyAsyncListener是一个实现了AsyncListener接口的类
     }
 ```
 
