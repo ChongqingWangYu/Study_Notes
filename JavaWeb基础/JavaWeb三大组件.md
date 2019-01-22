@@ -360,8 +360,15 @@ public class ServletRequestEvent extends EventObject {
 
 `ServletRequestAttributeListener`接口中的三个方法都可以获得一个继承自`ServletRequestEvent`的`ServletRequestAttributeEvent`对象。
 
+## 三大组件的部署描述符（web.xml）
+
+> 官方文档：[http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-common_4_0.xsd](http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-common_4_0.xsd)，（下载后可以用visual studio 打开可以看到目录）官方文档中详细说明了web.xml中的各种元素的配置规则。
 
 
-参考：1.[https://blog.csdn.net/xiaojie119120/article/details/73274759](https://blog.csdn.net/xiaojie119120/article/details/73274759)
 
-​	   2.《Servlet、JSP和Spring MVC初学指南》
+------
+
+以上内容参考：1.[https://blog.csdn.net/xiaojie119120/article/details/73274759](https://blog.csdn.net/xiaojie119120/article/details/73274759)
+
+​	  		   2.《Servlet、JSP和Spring MVC初学指南》
+
