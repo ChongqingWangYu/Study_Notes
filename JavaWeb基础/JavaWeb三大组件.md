@@ -362,7 +362,53 @@ public class ServletRequestEvent extends EventObject {
 
 ## 三大组件的部署描述符（web.xml）
 
-> 官方文档：[http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-common_4_0.xsd](http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-common_4_0.xsd)，（下载后可以用visual studio 打开可以看到目录）官方文档中详细说明了web.xml中的各种元素的配置规则。
+在Servlet 3.0中虽然可以通过注解的方式部署不太复杂的应用程序，但有些时候仍然需要部署描述符，比如：需要传递初始参数给ServletContext，指定多个过滤器的调用顺序，更改会话超时设置，限制资源访问，配置用户身份验证方式等。
+
+官方文档：[http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-common_4_0.xsd](http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-common_4_0.xsd)，（下载后可以用visual studio 打开可以看到目录）官方文档中详细说明了web.xml中的各种元素的配置规则。
+
+参考：[http://www.cnblogs.com/hafiz/p/5715523.html](http://www.cnblogs.com/hafiz/p/5715523.html)
+
+## 异步处理
+
+> Web3.0引入的新功能，可以使用异步的Servlet和过滤器，以及异步监听器。
+
+### 异步Servlet和过滤器
+
+编写异步Servlet和过滤器需要添加`asyncSupport`属性（无论是注解方式还是xml方式），然后通过调用`ServletRequest`的`startAsync`方法来启动一个新线程以实现异步处理的功能，最后需要在Runnable中需要调用`asyncContext.complete();`或者`asyncContext.dispatch();`方法来完成任务例如下：
+
+```java
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)         throws ServletException, IOException {
+            final AsyncContext asyncContext = request.startAsync();
+            asyncContext.setTimeout(5000);
+            
+            asyncContext.start(new Runnable() {
+                @Override
+                public void run() {
+                    //do something...
+                    
+                    
+                    
+                    asyncContext.complete();
+                    //or .. asyncContext.dispatch();
+                }
+            });
+    }
+```
+
+### 异步的监听器
+
+异步的监听器，则需要监听类实现`AsyncListener`接口，并且**必须**（不能用注解方式或web.xml方式注册）通过调用`addListener`方法为`AsyncContext`（调用`ServletRequest`的`startAsync`方法会返回一个`AsyncContext`对象）手动注册一个`AsyncListener`监听器，用于接收所需要的事件。如下：
+
+```java
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)         throws ServletException, IOException {
+            final AsyncContext asyncContext = request.startAsync();
+            asyncContext.setTimeout(5000);
+            
+            asyncContext.addListener(new MyAsyncListener());//MyAsyncListener是一个实现了															     AsyncListener接口的类
+    }
+```
 
 
 
