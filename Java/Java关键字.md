@@ -79,3 +79,16 @@ public class Circle {
 
 ## instanceof关键字
 
+> 用于确定对象是否为另一个对象的实例。
+
+比如，判断myObject是否是Circle的实例：
+
+```java
+Object myObject = new Circle();
+if(myObject instanceof Circle){//:true
+    //do something
+}
+```
+
+一般在**对象转换**（显示转换）时，如果一个对象不是另一个对象的实例就会抛出`ClassCastException`，因此在尝试对象转换之前确保该对象另一个对象的实例。
+
