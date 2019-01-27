@@ -62,6 +62,98 @@
 - 接口中的方法会被隐式地指定为public abstract方法且只能是public abstract方法（用其他关键字，比如private、protected、static、 final等修饰会报编译错误）。
 - 接口中所有的方法不能有具体的实现，也就是说，接口中的方法必须都是抽象方法（Java8中接口有static和default方法可以有默认实现）。
 
+## 异常
+
+### 异常的分类
+
+![1548573529446](../images/1548572803236.png)
+
+Throwable类是所有异常的根。所有的Java异常类都直接或者间接地继承自Throwable。可以通过继承Exception或者Exception的子类来创建自己的异常类。
+
+- Error：系统内部错误，由Java虚拟机抛出。很少发生。
+- Exception：由程序和外部环境所引起的错误，能被程序捕获和处理。
+- RuntimeException：虽然他也是Exception的子类，但它一般是由于程序设计错误才会出现的异常，比如类型转换错误，访问一个越界数组或数值错误等。这在**程序运行时才会抛出发生**。
+- Error和RuntimeException以及他们的子类都称为**免检异常**，所有其它的异常都称为**必检异常**。必检异常就是指编译器会强制程序员检查并通过try-catch块处理他们，或者在方法头进行声明（抛出）。
+
+### 异常的处理
+
+#### 声明异常
+
+> 每个方法都必须声明它可能抛出的必检异常的类型，这称为声明异常。方法的调用者会被告知有异常，需要捕获或声明。
+
+使用`throws`关键字进行异常的声明，例如：
+
+```java
+public void myMethod() throws IOException
+```
+
+如果要在一个方法上声明多个异常，用逗号（,）隔开即可。
+
+*注意：*如果方法没有在父类中声明异常，那么就不能在子类中对其进行继承来声明异常。
+
+#### 抛出异常
+
+> 检测到错误的程序可以创建一个合适的异常类型的实例并抛出它，这就抛出一个异常。
+
+使用`throw`关键字进行异常的抛出，例如：
+
+```java
+throw new IllegalAraumentException("这是异常信息");
+```
+
+#### 捕获异常
+
+> 当抛出一个异常时，可以在try-catch块中捕获和处理它。
+
+例如：
+
+```java
+try{
+    //do something  and throw exception
+}catch(Exception1 ex){
+    //handler for exception1
+}catch(Exception2 ex){
+    //handler for exception2
+}
+```
+
+如果try块中的某条语句抛出一个异常，Java就会跳过try块中剩余的语句，然后开始逐个查找处理这个异常的代码的过程（判断在catch块中的异常类实例是否是该异常对象的类型）。处理这个异常的代码称为异常处理器。
+
+#### finally子句
+
+> 无论异常是否产生，finally子句总是会被执行的。
+
+不论异常是否出现或者是否被捕获，都希望执行某些代码。Java有一个finally子句，可以用来达到这个目的。语法如下：
+
+```java
+try{
+    //do something  and throw exception
+}catch(Exception1 ex){
+    //handler for exception1
+}catch(Exception2 ex){
+    //handler for exception2
+}finally{
+    //always run
+}
+```
+
+在任何情况下，finally块中的代码都会执行。
+
+*注意：*使用finally子句时可以省略掉catch块。
+
+#### 异常处理总结
+
+- try 块：用于捕获异常。其后可接零个或多个catch块，如果没有catch块，则必须跟一个finally块。
+- catch 块：用于处理try捕获到的异常。
+- finally 块：无论是否捕获或处理异常，finally块里的语句都会被执行。当在try块或catch块中遇到return语句时，finally语句块将在方法返回之前被执行。
+
+**在以下4种特殊情况下，finally块不会被执行：**
+
+1. 在finally语句块中发生了异常。
+2. 在前面的代码中用了System.exit()退出程序。
+3. 程序所在的线程死亡。
+4. 关闭CPU。
+
 ## 自动装箱与拆箱
 
 ### 装箱
