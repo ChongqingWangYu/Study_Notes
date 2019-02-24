@@ -1,3 +1,5 @@
+[TOC]
+
 # Java基础
 
 ## 什么是OO,OOA,OOD,OOP？
