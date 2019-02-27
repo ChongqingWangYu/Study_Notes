@@ -14,20 +14,20 @@
 
 - 设置用户名<!--（在github上注册的用户名）-->
 
-  ```
+  ```shell
   git  config -- global  user.name '你再github上注册的用户名'
   ```
 
 - 设置用户邮箱：<!--（注册时候的邮箱，该配置会在github主页上显示谁提交了该文件）-->
 
 
-  ```
+  ```shell
   git  config -- global  user.email  '注册时候的邮箱'
   ```
 
 - 用如下命令来看看是否配置成功
 
-  ```
+  ```shell
   git config --list
   ```
 
@@ -37,14 +37,14 @@
 
 - 找到项目所在目录下（工作区）的 .git/文件夹，进入.git/文件夹，然后执行如下命令分别设置用户名和邮箱
 
-  ```
+  ```shell
   git config user.name "用户名"
   git config user.email "邮箱"
   ```
 
 - 执行命令查看config文件
 
-  ```
+  ```shell
   cat config
   ```
 
@@ -56,7 +56,7 @@
 
 - 初始化一个Git仓库，把一个文件夹变为Git可以管理的本地仓库
 
-  ```
+  ```shell
   git init
   ```
 
@@ -66,25 +66,25 @@
 
      添加指定文件到暂存区：
 
-     ```
+     ```shell
      git add <file>
      ```
 
      添加所有修改的的文件到暂存区<!--(add和.之间有一个空格)-->：
 
-     ```
+     ```shell
      git add .
      ```
 
      例如：
 
-     ```
+     ```shell
      git add gitTest.txt
      ```
 
   2. 提交到本地仓库
 
-     ```
+     ```shell
      git commit -m <message>
      ```
 
@@ -92,13 +92,13 @@
 
      例如：
 
-     ```
+     ```shell
      git commit -m 添加gitTest文件
      ```
 
 - add和commit组合命令<!--（git add .和git commit -m <mesage>的合并）-->
 
-  ```
+  ```shell
   git commit -am <message>
   ```
 
@@ -106,13 +106,13 @@
 
 - 查看提交日志
 
-  ```
+  ```shell
   git log
   ```
 
   例如：
 
-  ```
+  ```shell
   $ git log
   commit 2e8b022a6e2ab2c8f246620f49fc13fb591e810a (HEAD -> master)
   Author: yyc007 <34782655@qq.com>
@@ -129,13 +129,13 @@
 
 - 版本回退到指定版本<!--（版本号就是git log信息中commit 后面的一大串内容）-->
 
-  ```
+  ```shell
   git reset --hard 版本号
   ```
 
   例如：
 
-  ```
+  ```shell
   $ git reset --hard 16ffdfa48ccc31bdb11d66ad9a552bc56d90d793
   HEAD is now at 16ffdfa 添加gitTest文件
   ```
@@ -144,43 +144,43 @@
 
 - 版本回退到前面几个版本
 
-  ```
+  ```shell
   git reset --hard HEAD~版本数/HEAD^
   ```
 
   例如：(回退到上一个版本)
 
-  ```
+  ```shell
   git reset --hard HEAD~1
   ```
 
   或者
 
-  ```
+  ```shell
   git reset --hard HEAD^
   ```
 
   又例如：（回退到上上一个版本）
 
-  ```
+  ```shell
   git reset --hard HEAD~2
   ```
 
   或者
 
-  ```
+  ```shell
   git reset --hard HEAD^^
   ```
 
 - 查看操作命令历史记录
 
-  ```
+  ```shell
   git reflog
   ```
 
   例如：
 
-  ```
+  ```shell
   $ git reflog
   bc70ed2 (HEAD -> master) HEAD@{0}: reset: moving to HEAD~1
   7fd2c6a HEAD@{1}: commit: 添加第二行内容
@@ -212,7 +212,7 @@
 
   当我们修改文件，通过git add <file>命令后，文件存在本地暂存区中。这时希望撤销本次对暂存区的提交，撤销后回到未add的状态。可通过下面的命令：
 
-  ```
+  ```shell
   git reset HEAD 文件
   ```
 
@@ -220,7 +220,7 @@
 
   通过commit命令之后，文件已经更新到本地仓库中，也就是已经更新到工作区中。这时希望撤销本次对工作区的提交，撤销后回到未commit的状态。可通过下面的命令：
 
-  ```
+  ```shell
   git checkout -- 文件
   ```
 
@@ -234,13 +234,13 @@
 
 - 在gitHub或码云上创建一个新的仓库，将远程仓库的git地址复制下来。然后通过命令建立连接，如下：
 
-  ```
+  ```shell
    git remote add origin url
   ```
 
   例如：
 
-  ```
+  ```shell
    git remote add origin https://gitee.com/yyc007/test-demo.git
   ```
 
@@ -248,7 +248,7 @@
 
 - 提交到远程仓库的命令：
 
-  ```
+  ```shell
   git push -u origin master
   ```
 
@@ -258,7 +258,7 @@
 
   就需要先执行一次：
 
-  ```
+  ```shell
   git pull --rebase origin master
   ```
 
@@ -274,7 +274,7 @@
 
 - 将远程仓库直接克隆到本地
 
-  ```
+  ```shell
   git clone url
   ```
 
@@ -282,43 +282,43 @@
 
 - 分支查看
 
-  ```
+  ```shell
   git branch
   ```
 
 - 创建分支
 
-  ```
+  ```shell
   git branch <name> 
   ```
 
   例如（下同）：
 
-  ```
+  ```shell
   git branch dev
   ```
 
 - 切换分支
 
-  ```
+  ```shell
   git checkout <name>
   ```
 
 - 创建+切换分支组合命令
 
-  ```
+  ```shell
   git checkout -b <name>
   ```
 
 - 删除分支
 
-  ```
+  ```shell
   git branch -d <name>
   ```
 
 - 合并分支
 
-  ```
+  ```shell
   git merge <name>
   ```
 
@@ -326,13 +326,13 @@
 
 - 查看远程仓库信息
 
-  ```
+  ```shell
   git remote -v
   ```
 
 - 从远程抓取分支
 
-  ```
+  ```shell
   git pull
   ```
 
@@ -340,13 +340,13 @@
 
   将建立好的分支推送到远程仓库中
 
-  ```
+  ```shell
   git push origin <branch-name>
   ```
 
   例如：
 
-  ```
+  ```shell
    git push origin dev
   ```
 
