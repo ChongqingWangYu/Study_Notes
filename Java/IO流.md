@@ -108,7 +108,39 @@ DataOutputStream output = new DataOutputStream( new BufferedOutputStream(new Fi1
 DataInputStream input = new DataInputStreamC new BufferedInputStreamCnew Fi1elnputStream("temp.dat")))； 
 ```
 
+- **ObjectInputStream 和ObjectOutputStream**
 
+> DatalnputStream 类和 DataOutputStream 类可以实现基本数据类型与字符串的输入和输出。而 ObjectlnputStream 类和 ObjectOutputStream 类除了可以实现基本数据类型与字符串的输入和输出之外，还可以实现输入和输出可序列化的对象
+
+- [ ] 可序列化对象
+
+可序列化对象必须是`Serializable`接口的实例对象，`Serializable`接口是一种标记接口。因为它没有方法，所以，不需要在类中为实现`Serializab1e`接口增加额外的代码。实现这个接口可以启动Java的序列化机制，自动完成存储对象和数组的过程。
+
+- [ ] 对象I/O实例
+
+写：
+
+```java
+ try ( 
+     ObjectOutputStream output = 
+     new ObjectOutputStream(new FileOutputStream("object.dat")); 
+     ) { 
+    output.writeUTF("John"); 
+    output,writeDouble(85.5); 
+    output.writeObject(new java.uti1.Date()); //写入一个Date对象
+}
+```
+
+读：
+
+```java
+try ( 
+    ObjectlnputStream input = new ObjectlnputStream(new Fi1elnputStreamC"object.dat"))； ) { 
+    String name = input.readUTF(); 
+    double score = input.readDouble(); 
+   java.util.Date date = (java.util.Date)(input.readObject());//读取一个Date对象
+}                                                    
+```
 
 ## 文本IO和二进制IO比较
 
